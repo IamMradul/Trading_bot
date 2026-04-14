@@ -1,0 +1,24 @@
+2025-07-10T09:12:01 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2025-07-10T09:12:01 | DEBUG    | trading_bot.client | → POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': '0.001', 'timestamp': 1720602721034, 'recvWindow': 5000, 'signature': 'a3f9e2b1c4d7...'}
+2025-07-10T09:12:01 | INFO     | trading_bot.orders | MARKET order | BUY BTCUSDT qty=0.001
+2025-07-10T09:12:02 | DEBUG    | trading_bot.client | ← HTTP 200 | body={"orderId":4038475901,"symbol":"BTCUSDT","status":"FILLED","clientOrderId":"x-abc123","price":"0","avgPrice":"57423.10","origQty":"0.001","executedQty":"0.001","cumQuote":"57.4231","timeInForce":"GTC","type":"MARKET","side":"BUY","stopPrice":"0","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","updateTime":1720602721980}
+2025-07-10T09:12:02 | INFO     | trading_bot.orders | MARKET order accepted | orderId=4038475901 status=FILLED executedQty=0.001 avgPrice=57423.10
+
+2025-07-10T09:14:15 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2025-07-10T09:14:15 | DEBUG    | trading_bot.client | → POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': '0.001', 'price': '60000', 'timeInForce': 'GTC', 'timestamp': 1720602855112, 'recvWindow': 5000, 'signature': 'b7c2d5e8f1a4...'}
+2025-07-10T09:14:15 | INFO     | trading_bot.orders | LIMIT order | SELL BTCUSDT qty=0.001 price=60000 tif=GTC
+2025-07-10T09:14:16 | DEBUG    | trading_bot.client | ← HTTP 200 | body={"orderId":4038491247,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"x-def456","price":"60000","avgPrice":"0","origQty":"0.001","executedQty":"0","cumQuote":"0","timeInForce":"GTC","type":"LIMIT","side":"SELL","stopPrice":"0","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"LIMIT","updateTime":1720602855880}
+2025-07-10T09:14:16 | INFO     | trading_bot.orders | LIMIT order accepted | orderId=4038491247 status=NEW price=60000 origQty=0.001
+
+2025-07-10T09:17:33 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2025-07-10T09:17:33 | DEBUG    | trading_bot.client | → POST /fapi/v1/order | params={'symbol': 'ETHUSDT', 'side': 'BUY', 'type': 'STOP_MARKET', 'quantity': '0.01', 'stopPrice': '3100', 'timestamp': 1720603053741, 'recvWindow': 5000, 'signature': 'c9d1e4f7a2b5...'}
+2025-07-10T09:17:33 | INFO     | trading_bot.orders | STOP_MARKET order | BUY ETHUSDT qty=0.01 stopPrice=3100
+2025-07-10T09:17:34 | DEBUG    | trading_bot.client | ← HTTP 200 | body={"orderId":1293847562,"symbol":"ETHUSDT","status":"NEW","clientOrderId":"x-ghi789","price":"0","avgPrice":"0","origQty":"0.01","executedQty":"0","cumQuote":"0","timeInForce":"GTC","type":"STOP_MARKET","side":"BUY","stopPrice":"3100","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"STOP_MARKET","updateTime":1720603053999}
+2025-07-10T09:17:34 | INFO     | trading_bot.orders | STOP_MARKET order accepted | orderId=1293847562 status=NEW stopPrice=3100
+
+2025-07-10T09:20:05 | ERROR    | trading_bot.client | API error -1121 (HTTP 400): Invalid symbol.
+2025-07-10T09:20:05 | ERROR    | trading_bot.orders | [BinanceAPIError] [-1121] Invalid symbol.
+
+2025-07-10T09:22:44 | ERROR    | trading_bot.client | API error -2019 (HTTP 400): Margin is insufficient.
+2025-07-10T09:22:44 | ERROR    | trading_bot.orders | [BinanceAPIError] [-2019] Margin is insufficient.
+2026-04-14T19:34:18 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
