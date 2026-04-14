@@ -22,3 +22,21 @@
 2025-07-10T09:22:44 | ERROR    | trading_bot.client | API error -2019 (HTTP 400): Margin is insufficient.
 2025-07-10T09:22:44 | ERROR    | trading_bot.orders | [BinanceAPIError] [-2019] Margin is insufficient.
 2026-04-14T19:34:18 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2026-04-15T02:07:56 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2026-04-15T02:07:56 | DEBUG    | trading_bot.client | → GET /fapi/v1/time | params=None
+2026-04-15T02:07:56 | DEBUG    | urllib3.connectionpool | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-04-15T02:07:56 | DEBUG    | urllib3.connectionpool | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-04-15T02:07:56 | DEBUG    | trading_bot.client | ← HTTP 200 | body={"serverTime":1776199076565}
+2026-04-15T02:08:54 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2026-04-15T02:08:54 | DEBUG    | trading_bot.client | → GET /fapi/v1/time | params=None
+2026-04-15T02:08:54 | DEBUG    | urllib3.connectionpool | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-04-15T02:08:55 | DEBUG    | urllib3.connectionpool | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-04-15T02:08:55 | DEBUG    | trading_bot.client | ← HTTP 200 | body={"serverTime":1776199135345}
+2026-04-15T02:09:17 | INFO     | trading_bot.client | BinanceFuturesClient initialised (base_url=https://testnet.binancefuture.com)
+2026-04-15T02:09:17 | INFO     | trading_bot.orders | MARKET order | BUY BTCUSDT qty=0.001
+2026-04-15T02:09:17 | INFO     | trading_bot.client | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=— stopPrice=—
+2026-04-15T02:09:17 | DEBUG    | trading_bot.client | → POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': '0.001', 'timestamp': 1776199157676, 'recvWindow': 5000, 'signature': '4a26ed1871cc720c5a33bfdaf06f8515613d85fd78e70138eee9fb979c13066f'}
+2026-04-15T02:09:17 | DEBUG    | urllib3.connectionpool | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-04-15T02:09:18 | DEBUG    | urllib3.connectionpool | https://testnet.binancefuture.com:443 "POST /fapi/v1/order?symbol=BTCUSDT&side=BUY&type=MARKET&quantity=0.001&timestamp=1776199157676&recvWindow=5000&signature=4a26ed1871cc720c5a33bfdaf06f8515613d85fd78e70138eee9fb979c13066f HTTP/1.1" 401 69
+2026-04-15T02:09:18 | DEBUG    | trading_bot.client | ← HTTP 401 | body={"code":-2015,"msg":"Invalid API-key, IP, or permissions for action"}
+2026-04-15T02:09:18 | ERROR    | trading_bot.client | API error -2015 (HTTP 401): Invalid API-key, IP, or permissions for action

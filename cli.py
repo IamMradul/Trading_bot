@@ -30,6 +30,7 @@ import sys
 from typing import Optional
 
 import click
+from dotenv import load_dotenv
 
 from bot.client import BinanceFuturesClient, BinanceAPIError, BinanceNetworkError, BinanceAuthError
 from bot.orders import place_order as _place_order
@@ -57,22 +58,28 @@ def _kv(label: str, value, color: str = "white") -> None:
 
 # ── Client factory ─────────────────────────────────────────────────────────────
 
-def _build_client(log_level: str) -> BinanceFuturesClient:
+def _build_client(log_level: str, require_auth: bool = True) -> BinanceFuturesClient:
     """Read credentials from environment and return a configured client."""
     setup_logging(level=log_level)
+    load_dotenv()
 
     api_key    = os.getenv("BINANCE_API_KEY", "").strip()
     api_secret = os.getenv("BINANCE_API_SECRET", "").strip()
 
-    if not api_key or not api_secret:
+    if require_auth and (not api_key or not api_secret):
         click.echo(
             err("✗ API credentials not found.\n")
             + warn(
-                "  Set the following environment variables before running:\n"
-                "    export BINANCE_API_KEY='your_key_here'\n"
-                "    export BINANCE_API_SECRET='your_secret_here'\n"
-                "  Or create a .env file and load it with:\n"
-                "    source .env"
+                "  Create a .env file in this folder with:\n"
+                "    BINANCE_API_KEY=your_key_here\n"
+                "    BINANCE_API_SECRET=your_secret_here\n\n"
+                "  Or set environment variables manually:\n"
+                "    PowerShell:\n"
+                "      $env:BINANCE_API_KEY='your_key_here'\n"
+                "      $env:BINANCE_API_SECRET='your_secret_here'\n"
+                "    Command Prompt:\n"
+                "      set BINANCE_API_KEY=your_key_here\n"
+                "      set BINANCE_API_SECRET=your_secret_here"
             )
         )
         sys.exit(1)
@@ -284,7 +291,7 @@ def cancel_order_cmd(ctx: click.Context, symbol: str, order_id: int) -> None:
 @click.pass_context
 def server_time_cmd(ctx: click.Context) -> None:
     """Fetch and display Binance Testnet server time (connectivity check)."""
-    client = _build_client(ctx.obj["log_level"])
+    client = _build_client(ctx.obj["log_level"], require_auth=False)
 
     try:
         ts = client.get_server_time()
@@ -293,7 +300,7 @@ def server_time_cmd(ctx: click.Context) -> None:
         sys.exit(1)
 
     import datetime
-    dt = datetime.datetime.utcfromtimestamp(ts / 1000).strftime("%Y-%m-%d %H:%M:%S UTC")
+    dt = datetime.datetime.fromtimestamp(ts / 1000, datetime.UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
     click.echo(info(f"✓ Binance Testnet server time: {dt} (epoch ms: {ts})"))
 
 

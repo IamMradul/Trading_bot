@@ -80,15 +80,18 @@ set BINANCE_API_KEY=your_api_key_here
 set BINANCE_API_SECRET=your_secret_key_here
 ```
 
+**Windows (PowerShell):**
+```powershell
+$env:BINANCE_API_KEY="your_api_key_here"
+$env:BINANCE_API_SECRET="your_secret_key_here"
+```
+
 Or create a `.env` file in the project root:
 ```dotenv
 BINANCE_API_KEY=your_api_key_here
 BINANCE_API_SECRET=your_secret_key_here
 ```
-Then load it:
-```bash
-source .env          # or: set -a; source .env; set +a
-```
+The CLI auto-loads `.env` on startup, so no manual `source` step is needed.
 
 ---
 
@@ -242,7 +245,7 @@ Sample log entries are included in `logs/trading_bot.log`.
    `0.001` BTC and `0.01` ETH are accepted; use `exchange-info` (available via the client) for exact filters.
 3. `STOP_MARKET` orders require the stop price to be above/below the current market price depending on side — the Testnet will return `-4061` if not.
 4. Credentials are intentionally **not** hard-coded; they are read from the environment.
-5. `python-dotenv` is listed as a dependency but **not** auto-loaded. Load your `.env` manually with `source .env` to keep the scope explicit.
+5. `python-dotenv` is auto-loaded at startup, so a project-root `.env` file works out of the box.
 
 ---
 
@@ -252,6 +255,6 @@ Sample log entries are included in `logs/trading_bot.log`.
 |---|---|
 | `requests` | HTTP REST calls to Binance API |
 | `click` | CLI parsing, validation, coloured output |
-| `python-dotenv` | Optional `.env` file support |
+| `python-dotenv` | Auto-load `.env` file support |
 
 All are pure Python and install in seconds.

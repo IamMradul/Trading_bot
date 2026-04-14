@@ -75,23 +75,21 @@ class BinanceFuturesClient:
 
     def __init__(
         self,
-        api_key: str,
-        api_secret: str,
+        api_key: str = "",
+        api_secret: str = "",
         base_url: str = BASE_URL,
         recv_window: int = 5000,
         timeout: int = 10,
     ) -> None:
-        if not api_key or not api_secret:
-            raise BinanceAuthError("api_key and api_secret must not be empty.")
-
-        self._api_key = api_key
-        self._api_secret = api_secret
+        self._api_key = (api_key or "").strip()
+        self._api_secret = (api_secret or "").strip()
         self.base_url = base_url.rstrip("/")
         self.recv_window = recv_window
         self.timeout = timeout
 
         self._session = requests.Session()
-        self._session.headers.update({"X-MBX-APIKEY": self._api_key})
+        if self._api_key:
+            self._session.headers.update({"X-MBX-APIKEY": self._api_key})
 
         log.info("BinanceFuturesClient initialised (base_url=%s)", self.base_url)
 
@@ -133,6 +131,11 @@ class BinanceFuturesClient:
         url = f"{self.base_url}{path}"
 
         if signed:
+            if not self._api_key or not self._api_secret:
+                raise BinanceAuthError(
+                    "Signed endpoint requested but API credentials are missing. "
+                    "Set BINANCE_API_KEY and BINANCE_API_SECRET."
+                )
             params = kwargs.pop("params", {})
             kwargs["params"] = self._signed_params(params)
 
